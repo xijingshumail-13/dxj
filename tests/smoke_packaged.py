@@ -63,6 +63,18 @@ def main():
             command = [sys.executable, str(target)]
         else:
             command = [str(target)]
+        # Python source honors this forced legacy encoding. A packaged executable
+        # may ignore Python environment settings, so it is also checked directly
+        # under the Windows runner's actual redirected-output encoding.
+        environment = os.environ.copy()
+        environment.update(PYTHONIOENCODING="cp1252:strict", PYTHONUTF8="0")
+        help_result = subprocess.run(command + ["--help"], cwd=other_directory,
+                                     env=environment, capture_output=True, timeout=60)
+        assert help_result.returncode == 0, (
+            "Program --help failed: " + help_result.stderr.decode("utf-8", errors="replace")
+        )
+        assert "大学节 SVG 抽签" in help_result.stdout.decode("utf-8"), "Chinese help is unreadable."
+        assert not help_result.stderr, "Program --help unexpectedly wrote errors."
         command += ["--no-browser", "--port", "0"]
         wb = Workbook()
         wb.active.append(["姓名"])
@@ -75,6 +87,7 @@ def main():
         try:
             with log.open("wb") as output:
                 process = subprocess.Popen(command, cwd=other_directory,
+                                           env=environment,
                                            stdin=subprocess.DEVNULL, stdout=output, stderr=subprocess.STDOUT)
                 deadline = time.monotonic() + 60
                 base = None
@@ -93,6 +106,9 @@ def main():
                 else:
                     raise AssertionError("Program did not start within 60 seconds.")
                 assert base is not None
+                startup = log.read_bytes().decode("utf-8")
+                assert "大学节抽签已启动" in startup, "Chinese startup message is unreadable."
+                assert "UnicodeEncodeError" not in startup
                 page = request(base, "/").decode("utf-8")
                 assert '<svg id="slotMachine"' in page, "Bundled SVG page is missing."
                 assert state["students"] == ["集成测试甲", "集成测试乙"]
@@ -115,7 +131,7 @@ def main():
                 finally:
                     result.close()
                 assert not (other_directory / "result.xlsx").exists(), "Output used working directory."
-                print("Packaged smoke test passed: embedded SVG, executable-relative paths, all draws, save and export.")
+                print("Packaged smoke test passed: UTF-8 help and startup, embedded SVG, executable-relative paths, all draws, save and export.")
         except Exception:
             print(log.read_bytes().decode("utf-8", errors="replace"), file=sys.stderr)
             raise
