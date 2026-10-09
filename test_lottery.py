@@ -3,7 +3,10 @@ from __future__ import annotations
 
 from concurrent.futures import ThreadPoolExecutor
 from copy import deepcopy
+import os
 from pathlib import Path
+import subprocess
+import sys
 import tempfile
 import threading
 import unittest
@@ -12,6 +15,38 @@ from unittest.mock import patch
 from openpyxl import Workbook, load_workbook
 
 import lottery
+
+
+class CliEncodingTests(unittest.TestCase):
+    def run_cli(self, *arguments):
+        environment = os.environ.copy()
+        environment.update(PYTHONIOENCODING="cp1252:strict", PYTHONUTF8="0")
+        with tempfile.TemporaryDirectory(prefix="lottery-encoding-") as directory:
+            return subprocess.run(
+                [sys.executable, str(Path(lottery.__file__).resolve()), *arguments],
+                cwd=directory, env=environment, capture_output=True, timeout=15,
+            )
+
+    def test_help_remains_readable_when_stdout_starts_as_cp1252(self):
+        result = self.run_cli("--help")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("大学节 SVG 抽签", result.stdout.decode("utf-8"))
+        self.assertEqual(result.stderr, b"")
+
+    def test_missing_roster_error_remains_readable_with_cp1252(self):
+        result = self.run_cli("--input", "不存在的测试名单.xlsx", "--no-browser")
+        self.assertEqual(result.returncode, 1, result.stderr)
+        message = result.stderr.decode("utf-8")
+        self.assertIn("无法启动：找不到名单", message)
+        self.assertIn("不存在的测试名单.xlsx", message)
+        self.assertNotIn("UnicodeEncodeError", message)
+
+    def test_argparse_error_preserves_chinese_argument_with_cp1252(self):
+        result = self.run_cli("--port", "不是端口")
+        self.assertEqual(result.returncode, 2, result.stderr)
+        message = result.stderr.decode("utf-8")
+        self.assertIn("不是端口", message)
+        self.assertNotIn("UnicodeEncodeError", message)
 
 
 class LotteryTests(unittest.TestCase):

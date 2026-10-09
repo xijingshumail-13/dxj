@@ -359,7 +359,19 @@ def make_handler(lottery: Lottery):
     return Handler
 
 
+def configure_console_output():
+    """重定向到 Windows 日志时也使用 UTF-8，避免中文触发 cp1252 编码错误。
+
+    PyInstaller 的程序可能忽略 PYTHONIOENCODING，因此必须在程序内设置，
+    并且要早于 argparse 的 --help 和错误信息输出。
+    """
+    for stream in (sys.stdout, sys.stderr):
+        if stream is not None and hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="backslashreplace")
+
+
 def main():
+    configure_console_output()
     parser = argparse.ArgumentParser(description="大学节 SVG 抽签：同场不重复，每人两场去不同大学。")
     parser.add_argument("--input", type=Path, default=INPUT_FILE, help="学生名单，默认程序旁的 student.xlsx")
     parser.add_argument("--output", type=Path, default=OUTPUT_FILE, help="结果文件，默认程序旁的 result.xlsx")
