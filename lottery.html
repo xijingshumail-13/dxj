@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#14283f">
+  <title>大学节 · 未来启程</title>
+  <style>
+    :root{--ink:#16293f;--muted:#74808a;--paper:#f6f5f0;--line:#e4e5df;--gold:#e8bc68;--navy:#14283f;--green:#39826a;--font:"PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif}
+    *{box-sizing:border-box}[hidden]{display:none!important}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font);-webkit-font-smoothing:antialiased}button{font:inherit;cursor:pointer}button:disabled{cursor:not-allowed;opacity:.46}button:focus-visible{outline:3px solid #438ba6;outline-offset:4px}button,svg{touch-action:manipulation}button{transition:background .18s,transform .18s}button:not(:disabled):active{transform:translateY(1px)}
+    .wrap{max-width:1380px;margin:0 auto;padding:0 54px}.topbar{height:91px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:13px}.brand-icon{width:39px;height:39px;background:var(--ink);color:var(--gold);display:grid;place-items:center;border-radius:12px}.brand-name{font-size:18px;letter-spacing:2px;font-weight:700}.brand-sub{font-size:10px;letter-spacing:2.8px;color:var(--muted);margin-top:4px}.top-right{display:flex;align-items:center;gap:22px}.connection{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted)}.dot{width:6px;height:6px;border-radius:50%;background:#a6adb1}.dot.online{background:var(--green)}.plain-button{border:0;background:transparent;color:#65737e;font-size:12px;display:flex;gap:6px;align-items:center;padding:8px}.hero{padding:39px 0 28px;display:flex;justify-content:space-between;align-items:end;gap:20px}.eyebrow{font-size:11px;letter-spacing:3px;color:#9b7c43;margin:0 0 11px;font-weight:700}.hero h1{font-size:34px;line-height:1.4;letter-spacing:1px;margin:0;font-weight:650}.hero p{font-size:13px;color:var(--muted);margin:12px 0 0;line-height:1.8}.event-mark{font-size:12px;letter-spacing:1px;color:#89928f;text-align:right;line-height:1.8;white-space:nowrap}.event-mark strong{font-family:Georgia,serif;font-weight:400;font-style:italic;font-size:25px;color:#b0b3a5;display:block}.workspace{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(290px,1fr);gap:23px;align-items:stretch}
+    .machine{position:relative;overflow:hidden;background:var(--navy);border-radius:21px;box-shadow:0 15px 33px #12283b13;color:#fff;padding:25px 29px 24px;min-height:436px}.machine::before{content:"";position:absolute;width:340px;height:340px;border-radius:50%;border:1px solid #ffffff06;right:-160px;top:-165px;box-shadow:0 0 0 38px #ffffff03,0 0 0 76px #ffffff02;pointer-events:none}.machine-head{position:relative;display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:11px;color:#bdc6d0;letter-spacing:2px}.machine-head .live-label{display:flex;align-items:center;gap:7px;color:#edc779;font-size:10px;letter-spacing:1.7px}.live-label i{width:5px;height:5px;background:#ebc47d;border-radius:100%}.participant{margin:23px 0 6px;text-align:center;position:relative}.participant .caption{font-size:11px;letter-spacing:2px;color:#a1afbf}.student-name{margin:9px 0 0;font-size:29px;letter-spacing:3px;line-height:1.3;font-weight:600;overflow-wrap:anywhere}.reel-wrap{position:relative;margin:8px -5px 8px}.reel{display:block;width:100%;height:auto;max-height:210px}.reel-text{font-family:var(--font);font-size:30px;font-weight:600;letter-spacing:1px;fill:#273447}.machine-foot{display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:11px;color:#8798aa;line-height:1.6}.round-label{color:#efd095;display:flex;gap:7px;align-items:center}.round-label .round-dots{display:flex;gap:4px}.round-dots i{height:5px;width:18px;border-radius:4px;background:#ffffff20}.round-dots i.active{background:var(--gold)}.controls{display:flex;gap:11px;margin-top:19px}.draw-button{border:1px solid #ecca85;color:#26313a;background:linear-gradient(110deg,#f0d39a,#e8bd6c);height:48px;border-radius:9px;font-size:15px;letter-spacing:2px;font-weight:650;flex:1;box-shadow:0 3px 10px #0000000f}.draw-button:not(:disabled):hover{background:#f0d49a}.auto-button{border:1px solid #ffffff25;color:#d7dfe7;background:#ffffff05;height:48px;border-radius:9px;font-size:13px;padding:0 20px;min-width:114px}.auto-button:not(:disabled):hover{background:#ffffff10}.auto-button.running{color:#f0d49a;border-color:#e8bc6860}.machine.busy .live-label i{animation:blink 1s infinite}.machine.busy .student-name{color:#f2d9a9}@keyframes blink{50%{opacity:.25}}
+    .assignment{border:1px solid var(--line);border-radius:21px;background:#fff;padding:26px 27px 21px;display:flex;flex-direction:column}.section-kicker{font-size:10px;letter-spacing:2px;color:#9da6ab}.assignment-top{display:flex;align-items:center;justify-content:space-between;gap:12px}.assignment h2{font-size:17px;margin:9px 0 0;font-weight:600;letter-spacing:1px}.student-badge{font-size:11px;color:#8d969b;border:1px solid #e6e8e7;border-radius:6px;padding:5px 8px;white-space:nowrap}.ticket{position:relative;margin-top:23px;border:1px solid #e4e7e4;background:#fafbf9;border-radius:10px;padding:17px 17px 19px;overflow:hidden;min-height:98px}.ticket + .ticket{margin-top:13px}.ticket-top{display:flex;gap:8px;align-items:center;font-size:11px;color:#8b949a}.ticket-number{color:#9da49c;font-size:12px;font-family:Georgia,serif;font-style:italic}.ticket-value{margin-top:14px;color:#a7adaf;font-size:17px;line-height:1.5;letter-spacing:.4px;overflow-wrap:anywhere}.ticket.filled{border-color:#dedcca;background:#fcfbf6}.ticket.filled .ticket-value{color:var(--ink);font-weight:600}.ticket.filled .ticket-top{color:#9d814c}.ticket.filled::after{content:"✓";position:absolute;right:16px;top:15px;color:#a7af98;font-size:13px}.assignment-note{color:#8b979b;font-size:11px;line-height:1.8;margin:19px 0 0;display:flex;gap:7px;align-items:start}.assignment-note svg{flex-shrink:0;margin-top:2px}.progress-area{display:flex;align-items:center;gap:16px;margin-top:auto;padding-top:21px}.progress-track{height:5px;background:#e9ece5;flex:1;border-radius:9px;overflow:hidden}.progress-bar{background:#648571;width:0;height:100%;border-radius:9px;transition:width .4s}.progress-value{font-size:11px;color:#808c92;white-space:nowrap}.progress-value strong{color:#344b54;font-weight:600}
+    .message{margin-top:18px;padding:12px 15px;background:#edf4ef;border:1px solid #d9e8de;color:#416853;border-radius:9px;font-size:12px;line-height:1.8;display:flex;align-items:center;justify-content:space-between;gap:16px}.message[hidden]{display:none}.message.error{background:#fff2ee;border-color:#f1d7cd;color:#9c513d}.retry{border:1px solid currentColor;border-radius:5px;padding:5px 10px;color:inherit;background:transparent;white-space:nowrap;font-size:12px}.retry[hidden]{display:none}
+    .results{padding-top:34px;padding-bottom:30px}.results-head{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:16px}.results-title{display:flex;align-items:center;gap:12px}.results h2{font-size:17px;margin:0;font-weight:600;letter-spacing:.8px}.result-count{font-size:10px;border-radius:20px;background:#e7eae3;padding:4px 8px;color:#7d887d}.export{border:1px solid #d8ddd7;border-radius:7px;padding:9px 13px;background:transparent;font-size:12px;color:#526364;display:flex;align-items:center;gap:7px}.export:not(:disabled):hover{background:#e9ece4}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px;background:#fff;max-height:358px}table{border-collapse:collapse;width:100%;text-align:left;font-size:12px;white-space:nowrap}thead{background:#f0f2ed;color:#8a948e;position:sticky;top:0;z-index:1}th{padding:14px 20px;font-weight:400;font-size:11px}td{padding:16px 20px;border-top:1px solid #eef0eb;color:#4e5c67}.row-number{width:60px;color:#a4acae;font-family:Georgia,serif}.name-cell{color:#283c4d;font-weight:600}.waiting{color:#b2b9b9}.status-pill{display:inline-flex;align-items:center;gap:5px;font-size:10px;color:#8b979b}.status-pill.complete{color:#6f886d}.status-pill.current{color:#a78851}.status-pill::before{content:"";height:4px;width:4px;background:currentColor;border-radius:50%}.current-row{background:#fcfbf6}.empty{padding:28px;text-align:center;color:#a5adad}.footer{border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:10px;font-size:10px;color:#a4aaa4;padding:20px 0 24px;letter-spacing:.4px}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}.hidden{display:none!important}
+    @media(min-width:1500px){.wrap{max-width:1490px}.hero{padding-top:49px}.workspace{gap:28px}.machine{padding:30px 38px 27px}.student-name{font-size:33px}.reel{max-height:238px}.assignment{padding:30px}.ticket{margin-top:29px;min-height:111px}.ticket + .ticket{margin-top:16px}.ticket-value{font-size:20px}}
+    @media(max-width:960px){.wrap{padding:0 28px}.workspace{grid-template-columns:minmax(0,1.4fr) minmax(255px,1fr);gap:16px}.machine{padding:23px 21px;min-height:415px}.assignment{padding:24px 20px}.student-name{font-size:27px}.hero h1{font-size:30px}.controls{gap:8px}.auto-button{padding:0 11px;min-width:98px}.machine-foot{font-size:10px}.reel-wrap{margin:16px -8px}.ticket-value{font-size:15px}.event-mark{display:none}}
+    @media(max-width:700px){.wrap{padding:0 18px}.topbar{height:76px}.brand-name{font-size:16px}.brand-sub{font-size:8px}.top-right{gap:5px}.connection{font-size:10px}.plain-button span{display:none}.hero{padding:28px 0 24px}.hero h1{font-size:27px}.hero p{font-size:12px}.workspace{grid-template-columns:1fr}.machine{min-height:0;padding:23px}.participant{margin-top:21px}.reel{max-height:220px}.reel-wrap{margin:11px -6px}.machine-foot{font-size:11px}.controls{margin-top:17px}.assignment{padding:22px;display:grid;grid-template-columns:1fr 1fr;gap:13px}.assignment-top,.assignment-note,.progress-area{grid-column:1 / -1}.assignment h2{font-size:16px}.ticket,.ticket + .ticket{margin-top:7px;padding:15px 13px;min-height:107px}.ticket-value{font-size:15px;margin-top:14px}.ticket-top{font-size:10px}.assignment-note{margin:0;font-size:10px}.progress-area{padding-top:0}.results{padding-top:28px}.results h2{font-size:16px}th,td{padding:13px 14px}.footer{line-height:1.7;font-size:9px}.footer span:last-child{max-width:145px;text-align:right}.message{align-items:start}.student-name{font-size:28px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand"><div class="brand-icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="m3 10 10-5 10 5-10 5-10-5Z" stroke="currentColor" stroke-width="1.5"/><path d="M7 12v6c4 3 8 3 12 0v-6M23 10v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div><div class="brand-name">大学节</div><div class="brand-sub">UNIVERSITY FESTIVAL</div></div></div>
+      <div class="top-right"><div class="connection"><span id="connectionDot" class="dot"></span><span id="connectionText">正在读取名单</span></div><button id="fullscreenButton" class="plain-button" type="button" aria-label="切换全屏"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 2H2v4m8-4h4v4M2 10v4h4m8-4v4h-4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><span>全屏展示</span></button></div>
+    </header>
+    <section class="hero"><div><div class="eyebrow">YOUR NEXT CHAPTER</div><h1>下一站，向理想出发。</h1><p><span id="universityCount">24</span> 所大学，两次相遇。让每一次抽取，开启一个新的可能。</p></div><div class="event-mark"><strong>Discover your future.</strong>大学讲座 · 随机分配</div></section>
+    <main>
+      <div class="workspace">
+        <section id="machine" class="machine" aria-label="大学抽取机">
+          <div class="machine-head"><span>未来启程 · 抽取现场</span><span class="live-label"><i></i><span id="machineStatus">READY</span></span></div>
+          <div class="participant"><div class="caption" id="participantCaption">准备出发的同学</div><h2 id="studentName" class="student-name">正在读取名单…</h2></div>
+          <div class="reel-wrap">
+            <svg id="slotMachine" class="reel" viewBox="0 0 720 238" role="img" aria-labelledby="reelTitle reelDescription">
+              <title id="reelTitle">大学抽奖老虎机</title><desc id="reelDescription">等待抽取大学</desc>
+              <defs>
+                <linearGradient id="frame" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f5d791"/><stop offset=".5" stop-color="#a87a3e"/><stop offset="1" stop-color="#e9c37e"/></linearGradient>
+                <linearGradient id="fadeTop" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#e8e7de"/><stop offset="1" stop-color="#e8e7de" stop-opacity="0"/></linearGradient>
+                <linearGradient id="fadeBottom" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#e8e7de" stop-opacity="0"/><stop offset="1" stop-color="#e8e7de"/></linearGradient>
+                <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#e6e6dc"/><stop offset=".48" stop-color="#fffef6"/><stop offset="1" stop-color="#e7e6dc"/></linearGradient>
+                <clipPath id="reelClip"><rect x="47" y="31" width="626" height="176" rx="13"/></clipPath>
+              </defs>
+              <rect x="34" y="18" width="652" height="202" rx="22" fill="#071423" opacity=".35"/>
+              <rect x="39" y="22" width="642" height="194" rx="20" fill="url(#frame)"/>
+              <rect x="44" y="27" width="632" height="184" rx="16" fill="#6c553b"/>
+              <rect x="47" y="31" width="626" height="176" rx="13" fill="url(#glass)"/>
+              <g clip-path="url(#reelClip)">
+                <rect x="47" y="88" width="626" height="63" fill="#fffcf0"/>
+                <g id="reelTextGroup" aria-hidden="true"></g>
+                <rect x="47" y="31" width="626" height="54" fill="url(#fadeTop)"/>
+                <rect x="47" y="153" width="626" height="54" fill="url(#fadeBottom)"/>
+                <path d="M47 88H673M47 151H673" stroke="#c9a45d" stroke-opacity=".45"/>
+              </g>
+              <path d="m30 110 12 9-12 9" fill="#f1cd85"/><path d="m690 110-12 9 12 9" fill="#f1cd85"/>
+              <g fill="#f5dba1"><circle cx="15" cy="66" r="2.5"/><circle cx="15" cy="119" r="2.5"/><circle cx="15" cy="172" r="2.5"/><circle cx="705" cy="66" r="2.5"/><circle cx="705" cy="119" r="2.5"/><circle cx="705" cy="172" r="2.5"/></g>
+            </svg>
+          </div>
+          <div class="machine-foot"><span class="round-label"><span class="round-dots" aria-hidden="true"><i id="roundDot1" class="active"></i><i id="roundDot2"></i></span><span id="roundLabel">上半场 · 第 1 次 / 共 2 次</span></span><span id="keyboardHint">空格键也可抽取</span></div>
+          <div class="controls"><button id="drawButton" class="draw-button" type="button" disabled>抽一次 <span aria-hidden="true">↗</span></button><button id="autoButton" class="auto-button" type="button" disabled>自动抽取</button></div>
+        </section>
+        <aside class="assignment" aria-label="当前同学的抽取结果">
+          <div class="assignment-top"><div><div class="section-kicker">YOUR DESTINATIONS</div><h2 id="assignmentHeading">专属讲座行程</h2></div><span id="studentBadge" class="student-badge">— / —</span></div>
+          <div id="ticket1" class="ticket"><div class="ticket-top"><span class="ticket-number">01</span><span>上半场讲座</span></div><div id="university1" class="ticket-value">等待抽取</div></div>
+          <div id="ticket2" class="ticket"><div class="ticket-top"><span class="ticket-number">02</span><span>下半场讲座</span></div><div id="university2" class="ticket-value">等待抽取</div></div>
+          <p class="assignment-note"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m8 1.5 5 2v4c0 3-5 6.5-5 6.5S3 10.5 3 7.5v-4l5-2Z" stroke="currentColor"/><path d="m5.5 7.5 1.7 1.7 3.3-3.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg><span><span id="ruleText">每人两场各一所，同场高校不重复</span><br>每次抽取后，结果自动保存至 result.xlsx</span></p>
+          <div class="progress-area"><div class="progress-track" role="progressbar" aria-label="全班抽取进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressTrack"><div id="progressBar" class="progress-bar"></div></div><span class="progress-value"><strong id="drawCount">0</strong> / <span id="totalDraws">—</span> 次</span></div>
+        </aside>
+      </div>
+      <div id="message" class="message" role="status" hidden><span id="messageText"></span><button id="retryButton" type="button" class="retry" hidden>重新连接</button></div>
+      <section class="results" aria-labelledby="resultsHeading">
+        <div class="results-head"><div class="results-title"><h2 id="resultsHeading">全班抽取结果</h2><span id="resultCount" class="result-count">0 人完成</span></div><button id="exportButton" class="export" type="button" disabled><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2v8m-3-3 3 3 3-3M3 10v4h10v-4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>下载结果</button></div>
+        <div class="table-wrap"><table><thead><tr><th scope="col">序号</th><th scope="col">学生姓名</th><th scope="col">上半场讲座</th><th scope="col">下半场讲座</th><th scope="col">状态</th></tr></thead><tbody id="resultsBody"><tr><td colspan="5" class="empty">正在读取 student.xlsx 中的学生名单…</td></tr></tbody></table></div>
+      </section>
+    </main>
+    <footer class="footer"><span>大学节 · 每一种未来，都值得期待</span><span id="footerStatus">名单来源 student.xlsx · 结果保存 result.xlsx</span></footer>
+  </div>
+  <div id="announcement" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+  <script>
+    'use strict';
+    const $ = id => document.getElementById(id);
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let state = null, displayIndex = 0, busy = false, automatic = false, synced = false;
+    let autoTimer = null, animationFrame = null, loopActive = false, exportBusy = false;
+    const rowHeight = 63;
+    let reelOffset = 0;
+
+    function message(text, error = false, retry = false) {
+      $('message').hidden = !text;
+      $('message').classList.toggle('error', error);
+      $('messageText').textContent = text;
+      $('retryButton').hidden = !retry;
+    }
+    function setConnection(online, label) {
+      $('connectionDot').classList.toggle('online', online);
+      $('connectionText').textContent = label;
+    }
+    async function request(url, options = {}) {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 15000);
+      try {
+        const response = await fetch(url, {...options, signal:controller.signal, cache:'no-store', headers:{'Content-Type':'application/json', ...(options.headers || {})}});
+        let data;
+        try { data = await response.json(); } catch (_) { throw new Error('服务返回的数据无法读取，请检查程序是否仍在运行。'); }
+        if (!response.ok) {
+          const error = new Error(data.error || data.message || '操作未完成，请重试。');
+          error.status = response.status;
+          throw error;
+        }
+        return data;
+      } catch (error) {
+        if (error.name === 'AbortError') throw new Error('连接超时，请检查 Python 程序是否仍在运行。');
+        if (error instanceof TypeError) throw new Error('无法连接抽取程序，请检查 Python 程序是否仍在运行。');
+        throw error;
+      } finally { clearTimeout(timeout); }
+    }
+    function checkState(value) {
+      if (!value || !Array.isArray(value.students) || !Array.isArray(value.results) || !Array.isArray(value.universities) || !Number.isInteger(value.cursor) || !value.session_id) {
+        throw new Error('抽取进度数据不完整，请重新连接。');
+      }
+      return value;
+    }
+    function textNode(text, index) {
+      const node = document.createElementNS(svgNS, 'text');
+      node.setAttribute('x', '360');
+      node.setAttribute('y', String(120 + index * rowHeight));
+      node.setAttribute('text-anchor', 'middle');
+      node.setAttribute('dominant-baseline', 'middle');
+      node.setAttribute('class', 'reel-text');
+      if (String(text).length > 12) node.style.fontSize = '28px';
+      node.textContent = text;
+      return node;
+    }
+    function staticReel(label) {
+      cancelAnimationFrame(animationFrame); loopActive = false;
+      const group = $('reelTextGroup');
+      group.replaceChildren(textNode(label, 0)); group.removeAttribute('transform');
+      $('reelDescription').textContent = label;
+    }
+    function randomUniversity() {
+      const pool = state.available_universities && state.available_universities.length ? state.available_universities : state.universities;
+      return pool[Math.floor(Math.random() * pool.length)];
+    }
+    function beginSpin() {
+      cancelAnimationFrame(animationFrame);
+      loopActive = true;
+      if (reducedMotion.matches) { staticReel('正在抽取…'); return; }
+      const group = $('reelTextGroup');
+      const nodes = [];
+      group.replaceChildren();
+      for (let i = -2; i <= 3; i++) { const n = textNode(randomUniversity(), i); group.appendChild(n); nodes.push(n); }
+      let previousTime = performance.now(); reelOffset = 0;
+      function frame(now) {
+        if (!loopActive) return;
+        reelOffset += Math.min(now - previousTime, 50) * 1.15; previousTime = now;
+        while (reelOffset >= rowHeight) {
+          reelOffset -= rowHeight;
+          for (let i = 0; i < nodes.length - 1; i++) nodes[i].textContent = nodes[i + 1].textContent;
+          nodes[nodes.length - 1].textContent = randomUniversity();
+        }
+        group.setAttribute('transform', 'translate(0,' + (-reelOffset) + ')');
+        animationFrame = requestAnimationFrame(frame);
+      }
+      animationFrame = requestAnimationFrame(frame);
+    }
+    function finishSpin(university) {
+      loopActive = false; cancelAnimationFrame(animationFrame);
+      if (reducedMotion.matches) { staticReel(university); return Promise.resolve(); }
+      const group = $('reelTextGroup');
+      // Reuse the visible rows so that slowing down starts without a visual jump.
+      const visible = [...group.children].map(node => node.textContent);
+      const initialOffset = reelOffset;
+      group.replaceChildren();
+      const targetIndex = 25;
+      for (let i = -2; i <= targetIndex + 3; i++) {
+        const label = i === targetIndex ? university : (i < 4 && visible[i + 2] ? visible[i + 2] : randomUniversity());
+        group.appendChild(textNode(label, i));
+      }
+      const totalDistance = targetIndex * rowHeight - initialOffset;
+      const duration = 2450;
+      return new Promise(resolve => {
+        const started = performance.now();
+        function frame(now) {
+          const t = Math.min(1, (now - started) / duration);
+          const eased = 1 - Math.pow(1 - t, 3);
+          group.setAttribute('transform', 'translate(0,' + (-initialOffset - totalDistance * eased) + ')');
+          if (t < 1) { animationFrame = requestAnimationFrame(frame); }
+          else { staticReel(university); resolve(); }
+        }
+        animationFrame = requestAnimationFrame(frame);
+      });
+    }
+    function updateButtons() {
+      const unavailable = !state || !synced || Boolean(state.setup_error);
+      $('drawButton').disabled = unavailable || busy || automatic || state.done;
+      $('drawButton').textContent = state && state.setup_error ? '请先调整学生名单' : state && state.done ? '全部抽取完成 ✓' : busy ? '正在抽取…' : '抽一次 ↗';
+      $('autoButton').disabled = unavailable || (state && state.done) || (busy && !automatic);
+      $('autoButton').textContent = automatic ? '暂停自动' : '自动抽取';
+      $('autoButton').classList.toggle('running', automatic);
+      $('autoButton').setAttribute('aria-pressed', String(automatic));
+      $('exportButton').disabled = unavailable || busy || automatic || state.cursor === 0 || exportBusy;
+      $('machine').classList.toggle('busy', busy);
+      $('machineStatus').textContent = busy ? 'DRAWING' : (state && state.done ? 'COMPLETED' : automatic ? 'AUTO' : 'READY');
+      $('keyboardHint').textContent = automatic ? '暂停后会完成当前抽取' : busy ? '正在为你揭晓大学' : '空格键也可抽取';
+    }
+    function renderTable() {
+      const fragment = document.createDocumentFragment();
+      state.students.forEach((name, index) => {
+        const pair = state.results[index] || [null, null];
+        const tr = document.createElement('tr');
+        if (index === displayIndex) tr.className = 'current-row';
+        const number = document.createElement('td'); number.className = 'row-number'; number.textContent = String(index + 1).padStart(2, '0'); tr.appendChild(number);
+        const nameCell = document.createElement('td'); nameCell.className = 'name-cell'; nameCell.textContent = name; tr.appendChild(nameCell);
+        pair.slice(0, 2).forEach(value => {const cell = document.createElement('td'); cell.textContent = value || '等待抽取'; if (!value) cell.className = 'waiting'; tr.appendChild(cell);});
+        const status = document.createElement('td'); const pill = document.createElement('span'); pill.className = 'status-pill' + (pair[1] ? ' complete' : pair[0] ? ' current' : ''); pill.textContent = pair[1] ? '已完成' : pair[0] ? '进行中' : '待开始'; status.appendChild(pill); tr.appendChild(status);
+        fragment.appendChild(tr);
+      });
+      $('resultsBody').replaceChildren(fragment);
+    }
+    function render(keepReel = false) {
+      if (!state) { updateButtons(); return; }
+      displayIndex = Math.max(0, Math.min(displayIndex, state.students.length - 1));
+      const pair = state.results[displayIndex] || [null, null];
+      $('studentName').textContent = state.students[displayIndex] || '名单为空';
+      $('studentBadge').textContent = (displayIndex + 1) + ' / ' + state.students.length;
+      $('universityCount').textContent = state.universities.length;
+      $('ruleText').textContent = state.rule_text || '每人两场各一所，同场高校不重复';
+      $('participantCaption').textContent = state.done ? '所有同学已完成抽取' : pair[1] ? '这位同学的行程已就绪' : '准备出发的同学';
+      const round = pair[1] ? 2 : pair[0] ? 2 : 1;
+      $('roundLabel').textContent = pair[1] ? '两次抽取已完成' : (round === 1 ? '上半场' : '下半场') + ' · 第 ' + round + ' 次 / 共 2 次';
+      $('roundDot1').classList.add('active'); $('roundDot2').classList.toggle('active', round === 2);
+      [0, 1].forEach(i => { $('university' + (i + 1)).textContent = pair[i] || '等待抽取'; $('ticket' + (i + 1)).classList.toggle('filled', Boolean(pair[i])); });
+      $('drawCount').textContent = state.cursor; $('totalDraws').textContent = state.total_draws;
+      $('resultCount').textContent = state.completed_students + ' 人完成';
+      const progress = state.total_draws ? Math.round(state.cursor / state.total_draws * 100) : 0;
+      $('progressBar').style.width = progress + '%'; $('progressTrack').setAttribute('aria-valuenow', progress);
+      if (!keepReel) staticReel(pair[1] || pair[0] || '你的大学，即将揭晓');
+      renderTable(); updateButtons();
+    }
+    function stopAutomatic() { automatic = false; clearTimeout(autoTimer); autoTimer = null; updateButtons(); }
+    async function loadState({quiet = false} = {}) {
+      $('retryButton').disabled = true;
+      try {
+        state = checkState(await request('/api/state'));
+        synced = true;
+        displayIndex = state.done ? state.students.length - 1 : Math.floor(state.cursor / 2);
+        setConnection(true, '名单已就绪 · ' + state.students.length + ' 位同学');
+        render();
+        if (!quiet) {
+          if (state.setup_error) message(state.setup_error, true);
+          else if (state.done) message('全班抽取已完成，结果已保存至 ' + state.output_name + '。可以点击“下载结果”领取名单。');
+          else if (state.restored && state.cursor > 0) message('已恢复上次进度：完成 ' + state.cursor + ' 次抽取，可从当前同学继续。');
+          else message('');
+        }
+        return true;
+      } catch (error) {
+        synced = false; setConnection(false, '连接未就绪'); updateButtons();
+        message(error.message, true, true);
+        return false;
+      } finally { $('retryButton').disabled = false; }
+    }
+    async function draw() {
+      if (busy || !synced || !state || state.done || state.setup_error) return;
+      clearTimeout(autoTimer); autoTimer = null;
+      displayIndex = Math.floor(state.cursor / 2);
+      render(); message(''); busy = true; updateButtons();
+      const student = state.students[displayIndex];
+      const round = state.cursor % 2 + 1;
+      $('participantCaption').textContent = '正在抽取' + (round === 1 ? '上半场' : '下半场') + '讲座';
+      beginSpin();
+      try {
+        const response = await request('/api/draw', {method:'POST', body:JSON.stringify({session_id:state.session_id, cursor:state.cursor})});
+        const nextState = checkState(response.state);
+        if (!response.draw || typeof response.draw.university !== 'string') throw new Error('抽取结果无法读取，请重新连接确认进度。');
+        await finishSpin(response.draw.university);
+        state = nextState; displayIndex = response.draw.student_index;
+        busy = false; render(true);
+        $('announcement').textContent = student + '，' + (round === 1 ? '上半场' : '下半场') + '抽取结果：' + response.draw.university + '。结果已保存。';
+        setConnection(true, '结果已自动保存');
+        if (state.done) {
+          stopAutomatic(); message('全班抽取已完成！' + state.students.length + ' 位同学的讲座安排已保存至 ' + state.output_name + '。');
+        } else if (automatic) {
+          autoTimer = setTimeout(draw, 1050);
+        }
+      } catch (error) {
+        loopActive = false; cancelAnimationFrame(animationFrame); busy = false;
+        stopAutomatic(); synced = false; staticReel('请稍候，正在确认进度'); updateButtons();
+        const restored = await loadState({quiet:true});
+        if (restored) {
+          message(error.status === 409 ? '抽取进度已同步。可能有其他页面进行了抽取，请核对结果后继续。' : error.message + ' 已重新读取已保存的进度，请核对结果后继续。', true);
+        }
+      }
+    }
+    $('drawButton').addEventListener('click', draw);
+    $('autoButton').addEventListener('click', () => {
+      if (automatic) {stopAutomatic(); return;}
+      if (busy || !synced || !state || state.done || state.setup_error) return;
+      automatic = true; updateButtons(); draw();
+    });
+    $('retryButton').addEventListener('click', () => {stopAutomatic(); loadState();});
+    $('exportButton').addEventListener('click', async () => {
+      if (exportBusy || !state || !state.cursor) return;
+      exportBusy = true; updateButtons();
+      const controller = new AbortController(); const timeout = setTimeout(() => controller.abort(), 15000);
+      try {
+        const response = await fetch('/api/export', {cache:'no-store', signal:controller.signal});
+        if (!response.ok) {
+          let reason = '结果下载失败，请检查 result.xlsx 是否被其他软件占用。';
+          try {const body = await response.json(); reason = body.error || reason;} catch (_) {}
+          throw new Error(reason);
+        }
+        const blob = await response.blob(); const url = URL.createObjectURL(blob);
+        const link = document.createElement('a'); link.href = url; link.download = state.output_name || 'result.xlsx'; document.body.appendChild(link); link.click(); link.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 60000);
+      } catch (error) {
+        stopAutomatic(); message(error.name === 'AbortError' ? '下载超时，请检查 Python 程序是否仍在运行。' : error.message, true);
+      } finally {clearTimeout(timeout); exportBusy = false; updateButtons();}
+    });
+    $('fullscreenButton').addEventListener('click', async () => {
+      try {if (document.fullscreenElement) await document.exitFullscreen(); else await document.documentElement.requestFullscreen();}
+      catch (_) {message('浏览器未能进入全屏，可使用浏览器菜单中的全屏功能。');}
+    });
+    if (!document.fullscreenEnabled) $('fullscreenButton').hidden = true;
+    document.addEventListener('keydown', event => {
+      if (event.code !== 'Space' || event.repeat || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+      const target = event.target;
+      if (target.closest('button,input,textarea,select,a,[contenteditable="true"]')) return;
+      event.preventDefault();
+      if (!automatic) draw();
+    });
+    window.addEventListener('pagehide', () => {clearTimeout(autoTimer); cancelAnimationFrame(animationFrame);});
+    staticReel('你的大学，即将揭晓');
+    loadState();
+  </script>
+</body>
+</html>
